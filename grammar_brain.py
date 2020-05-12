@@ -74,7 +74,7 @@ def read_input():
 		if i != 1:
 			lines += '\n'
 		i = i - 1
-
+		# print(lines)
 	# print(lines)
 	return lines
 
