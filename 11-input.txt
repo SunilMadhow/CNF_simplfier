@@ -1,0 +1,7 @@
+6
+S ABAC
+A aA
+A _
+B bB
+B _
+C c

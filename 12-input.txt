@@ -1,0 +1,7 @@
+6
+S aAb 
+S BBa
+A bb
+A _
+B AA
+B bAa

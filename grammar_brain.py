@@ -4,11 +4,15 @@ import sys
 def parse(stdin):
 	array = stdin.split("\n")
 	grammar = []
-	for i in array:
+	for i in array[1:]:
 		s = []
 		production = i.split(" ")
 		# print(production)
 		variable = ""
+		# print(production)
+		# if (len(production)< 2):
+		# 	grammar.append(("S", ["S"]))
+		# 	return grammar
 		sent = production[1]
 		for i in range(0, len(sent)):
 			if sent[i].isupper():
@@ -36,23 +40,44 @@ def parse(stdin):
 	# return [tuple(array[i].split(" ")) for i in range(0, len(array))]
 
 def print_grammar(grammar):
+	print(len(grammar))
 	for i in range(0, len(grammar)):
 		print("%s %s" % (grammar[i][0], "".join(grammar[i][1])))
 
-lines = ""
-
-line = input()
-while line != "":
-	lines += line
-	line = input()
-	if line != "":
-		lines += '\n'
+def print_grammar_mentor(grammar):
+	# print(len(grammar))
+	for i in range(0, len(grammar)):
+		print("%s -> %s" % (grammar[i][0], "".join(grammar[i][1])))
 
 
-grammar = parse(lines)
-print(grammar)
-print_grammar(grammar)
-print()
+def read_input():
+
+	lines = ""
+	# for line in sys.stdin:
+	# 	print(line)
+	# 	if line == "":
+	# 		break
+	# 	lines += line + '\n'
+	# return lines[:-1]
+	while True:
+		try:
+			line = input()
+		except EOFError:
+			return lines
+		if line == '':
+			return lines[:-1]
+		lines += line + '\n'
+
+	# print(lines)
+	return lines
+
+
+# grammar = parse(lines)
+# print(grammar)
+# print_grammar(grammar)
+# print()
+
+
 
 def find_nullable(grammar):
 	array = [grammar[i][0] for i in range(0, len(grammar)) if grammar[i][1][0] == "_"]
@@ -78,24 +103,24 @@ def remove_lambda(grammar):
 	nullable = find_nullable(grammar)
 	# print(nullable)
 	# g_prime.append(grammar[0])
-	for i in range(0, len(grammar)):
-		nullable_chars = []
-		string = "".join(grammar[i][1])
-		for j in range(0, len(string)):
-			if string[j] in nullable:
-				nullable_chars.append(j)
-
+	for j in range(0, len(grammar)):
+		nullable_chars = [i for i in grammar[j][1] if i in nullable]
+		# string = "".join(grammar[i][1])
+		# for j in range(0, len(string)):
+		# 	if string[j] in nullable:
+		# 		nullable_chars.append(j)
 		all_combos = []
 		for r in range(0, len(nullable_chars)+1):
 			 all_combos += list(itertools.combinations(nullable_chars, r))
 		# print(all_combos)
+		# print(all_combos)
+		# print("------")
 		for combo in all_combos:
 			# print(combo)
-			newrule = [string[i] for i in range(0, len(string)) if i not in combo or string[i].islower()]
-			g_prime.append((grammar[i][0], newrule))
-	# print_grammar(g_prime)
-	# for i in g_prime:
-	# 	print(i)
+			newrule = [grammar[j][1][i] for i in range(0, len(grammar[j][1])) if grammar[j][1][i] not in combo or grammar[j][1][i].islower()]
+			# print("adding {}".format(newrule))
+			g_prime.append((grammar[j][0], newrule))
+
 	g_prime = [i for i in g_prime if len(i[1]) >= 1]
 	return [i for i in g_prime if i[1][0] != "" and i[1][0] != "_"]
 
@@ -125,7 +150,7 @@ def remove_unit_productions(grammar):
 			if (j[0] in dictionary[v]) and (any(i.islower() for i in "".join(j[1])) or len(j[1]) > 1):
 				if (v, j[1]) not in g_prime:
 					g_prime.append((v, j[1]))
-					print("appending {}".format((v, j[1])))
+					# print("appending {}".format((v, j[1])))
 	# print(g_prime)
 	g_prime = [item for item in g_prime if len(item[1]) > 1 or item[1][0].islower()]
 	return g_prime
@@ -151,7 +176,7 @@ def segregation(production):
 	# print("production = {}".format(production))
 	if len(sentential) > 1:
 		for i in range(0, len(sentential)):
-			print(sentential[i])
+			# print(sentential[i])
 			if sentential[i].islower():
 				production[1][i] = production[1][i].upper()
 				new_prods.append((sentential[i], [sentential[i].lower()]))
@@ -184,13 +209,14 @@ def cnf(grammar):
 			# to_remove.append(production)
 		else: g_prime.append(production)
 	grammar = g_prime
+	# print(grammar)
 	# grammar = [i for i in grammar + to_remove if i in grammar and i not in to_remove]
 	return grammar
 
-g_prime = remove_lambda(grammar)
+# g_prime = remove_lambda(grammar)
 # g_prime = remove_unit_productions(g_prime)
 # print_grammar(g_prime)
 # g_prime = cnf(g_prime)
 # print("------------")
 # split_variable_string(("A", ["B", "C", "X", "Y", "Z", "B67"]))
-print_grammar(g_prime)
+# print_grammar(g_prime)

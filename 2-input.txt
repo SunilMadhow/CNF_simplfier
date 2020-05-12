@@ -1,0 +1,8 @@
+7
+S ABaC
+A BC
+B b
+B _
+C D
+C _
+D d

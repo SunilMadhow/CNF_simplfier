@@ -1,0 +1,7 @@
+6
+S ABCd
+A BC
+B bB
+B _
+C cC
+C _

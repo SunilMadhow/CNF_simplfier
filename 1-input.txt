@@ -1,0 +1,5 @@
+4
+S aTb
+T aTb
+T Tb
+T _

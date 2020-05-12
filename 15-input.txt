@@ -1,0 +1,9 @@
+8
+S aS
+S A
+S _A_
+B a_a
+A a
+B aa
+C aCb
+C _

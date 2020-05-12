@@ -1,0 +1,7 @@
+6
+S ASA
+S aB
+S b
+A B
+B b
+B _

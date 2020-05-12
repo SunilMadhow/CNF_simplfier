@@ -1,0 +1,6 @@
+5
+S AC
+A ACB
+A _
+C Cc
+C c

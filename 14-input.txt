@@ -1,0 +1,6 @@
+5
+S ASB
+S a
+A aA
+A _
+B b
