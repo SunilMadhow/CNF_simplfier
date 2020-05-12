@@ -69,9 +69,9 @@ def read_input():
 	# 	lines += line + '\n'
 	i = int(input())
 	# print(i)
-	while i > 1:
+	while i > 0:
 		lines += input()
-		if i != 2:
+		if i != 1:
 			lines += '\n'
 		i = i - 1
 

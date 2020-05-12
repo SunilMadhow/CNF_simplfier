@@ -188,9 +188,9 @@ def cnf(grammar):
 	return grammar
 
 g_prime = remove_lambda(grammar)
-# g_prime = remove_unit_productions(g_prime)
+g_prime = remove_unit_productions(g_prime)
 # print_grammar(g_prime)
-# g_prime = cnf(g_prime)
+g_prime = cnf(g_prime)
 # print("------------")
 # split_variable_string(("A", ["B", "C", "X", "Y", "Z", "B67"]))
 print_grammar(g_prime)
