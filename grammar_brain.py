@@ -4,7 +4,7 @@ import sys
 def parse(stdin):
 	array = stdin.split("\n")
 	grammar = []
-	for i in array[1:]:
+	for i in array:
 		s = []
 		production = i.split(" ")
 		# print(production)
@@ -59,14 +59,21 @@ def read_input():
 	# 		break
 	# 	lines += line + '\n'
 	# return lines[:-1]
-	while True:
-		try:
-			line = input()
-		except EOFError:
-			return lines
-		if line == '':
-			return lines[:-1]
-		lines += line + '\n'
+	# while True:
+	# 	try:
+	# 		line = input()
+	# 	except EOFError:
+	# 		return lines
+	# 	if line == '':
+	# 		return lines[:-1]
+	# 	lines += line + '\n'
+	i = int(input())
+	# print(i)
+	while i > 1:
+		lines += input()
+		if i != 2:
+			lines += '\n'
+		i = i - 1
 
 	# print(lines)
 	return lines

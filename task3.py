@@ -1,6 +1,6 @@
 from grammar_brain import *
 
-string = input()
+string = read_input()
 if string != "" and string != "0":
 	grammar = parse(string)
 	g_prime = remove_lambda(grammar)
